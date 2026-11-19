@@ -1,0 +1,61 @@
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+
+# Config secrets
+backend/config/development.json
+backend/config/secret.json
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+
+
+
+
+# =========================
+# LOGS
+# =========================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =========================
+# DEPENDENCIES
+# =========================
+node_modules/
+
+# =========================
+# BUILD FILES
+# =========================
+dist/
+dist-ssr/
+*.local
+
+# =========================
+# EDITOR FILES
+# =========================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
