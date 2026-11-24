@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const createUser = require("../controllers/userAuthGenerate")
-const {loginuser} = require("../controllers/loginAuthVerify")
-const {logoutuser} = require("../controllers/loginAuthVerify")
+const {loginuser,logoutuser} = require("../controllers/loginAuthVerify")
 const T_middle_ware = require("../middleware/jwtCheck")
 
 

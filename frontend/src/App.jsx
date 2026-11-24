@@ -5,6 +5,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
 import Guestroute from "./components/Guestroute"
+import AdminPanel from "./pages/AdminPanel";
+import AdminLogin from "./pages/AdminLogin";
 
 function App() {
     return (
@@ -17,9 +19,16 @@ function App() {
                      <Route path="/Signup" element={<Singup />} />
                  </Route>
 
-                <Route element={<ProtectedRoute />}>
+                <Route element={<ProtectedRoute route="shop"/>}>
                     <Route path="/Profile" element={<Profile />} />
                 </Route>
+
+                <Route element={<ProtectedRoute route="owners/check/Admin"/>}>
+                    <Route path="/AdminPanel" element={<AdminPanel />} />
+                </Route>
+
+                <Route path="/Login/Admin" element={<AdminLogin />} />
+
             </Routes>
         </>
     );

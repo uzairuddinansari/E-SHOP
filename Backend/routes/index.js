@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const T_middle_ware = require("../middleware/jwtCheck")
 
+
 router.get("/",(req,res)=>{
     res.send("Hello world")
 })
