@@ -1,0 +1,128 @@
+
+#admin-login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #e5e5e5, #f5f5f5, #d4d4d4);
+    font-family: Arial, sans-serif;
+}
+
+#admin-login-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 48px 40px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #242424, #080808);
+    color: #f5f5f5;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.22);
+}
+
+#admin-login-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #a3a3a3;
+    font-weight: 600;
+}
+
+#admin-login-header h1 {
+    font-size: 34px;
+    margin: 18px 0 10px;
+    letter-spacing: -1.5px;
+}
+
+#admin-login-header p {
+    color: #a3a3a3;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+#admin-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.admin-login-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.admin-login-field label {
+    font-size: 12px;
+    color: #d4d4d4;
+    font-weight: 500;
+}
+
+.admin-login-field input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #414141;
+    border-radius: 8px;
+    outline: none;
+    background: #181818;
+    color: white;
+    font-size: 13px;
+    transition: 0.25s ease;
+}
+
+.admin-login-field input::placeholder {
+    color: #737373;
+}
+
+.admin-login-field input:focus {
+    border-color: #bdbdbd;
+    background: #202020;
+}
+
+#admin-login-error {
+    color: #ff7777;
+    font-size: 12px;
+    margin: 0;
+}
+
+#admin-login-submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(120deg, #e5e5e5, #bdbdbd);
+    color: #111;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#admin-login-submit:hover {
+    background: #fff;
+    transform: translateY(-2px);
+}
+
+#admin-login-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#admin-login-footer {
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #737373;
+    margin: 35px 0 0;
+}
+
+@media (max-width: 480px) {
+    #admin-login-card {
+        padding: 35px 24px;
+    }
+
+    #admin-login-header h1 {
+        font-size: 29px;
+    }
+}
