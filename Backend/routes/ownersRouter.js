@@ -23,9 +23,10 @@ router.get("/check/Admin", AdminAuth, (req,res)=>{
      res.status(201).send("shop is Here")
     }
     catch(err){
-        
         res.status(500).send(err.massage)
     }
 })
+
+
 
 module.exports = router;

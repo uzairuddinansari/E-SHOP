@@ -1,42 +1,33 @@
 const express = require("express");
 const router = express.Router();
-const T_middle_ware = require("../middleware/jwtCheck")
+const anyAuth = require("../middleware/anyAuth")
 const productModel = require("../models/product-schema")
+const upload = require("../config/multer")
 
-router.get("/",  T_middle_ware, (req, res) => {
+router.get("/",  anyAuth, (req, res) => {
     res.send("Products route working");
 });
 
-router.post("/create", T_middle_ware, async (req, res) => {
+router.post("/create", anyAuth, upload.single("image"), async (req, res) => {
     try {
-        const {
-            product,
-            image,
-            name,
-            price,
-            discount,
-            bgColor,
-            panelColor,
-            textColor,
-            buffer
-        } = req.body;
-
+        const {name,price,discount,bgColor,panelColor,textColor} = req.body;
+        
         const newProduct = await productModel.create({
-            product,
-            image,
+            image:req.file.buffer,
             name,
             price,
             discount,
             bgColor,
             panelColor,
             textColor,
-            buffer
         });
 
         res.status(201).json({
             message: "Product created successfully",
             product: newProduct
         });
+
+        res.send(newProduct)
 
     } catch (error) {
         res.status(500).json({ message: error.message });
