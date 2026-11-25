@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
+import "../../public/stylesheets/Protected.css"
 
 function GuestRoute() {
     const [auth, setAuth] = useState(null);
@@ -13,7 +14,10 @@ function GuestRoute() {
         .catch(() => setAuth(false));
     }, []);
 
-    if (auth === null) return <h2>Loading...</h2>;
+    if (auth === null) return  <div className="auth-loading">
+            <div className="loader"></div>
+            <p>Verifying Admin Access</p>
+        </div>;
 
     return auth ? <Navigate to="/Profile" replace /> : <Outlet />;
 }

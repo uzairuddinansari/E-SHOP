@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import Guestroute from "./components/Guestroute"
 import AdminPanel from "./pages/AdminPanel";
 import AdminLogin from "./pages/AdminLogin";
+import Admincheck from "./components/Admincheck";
 
 function App() {
     return (
@@ -19,7 +20,7 @@ function App() {
                      <Route path="/Signup" element={<Singup />} />
                  </Route>
 
-                <Route element={<ProtectedRoute route="shop"/>}>
+                <Route element={<ProtectedRoute route="users/check-auth" />}>
                     <Route path="/Profile" element={<Profile />} />
                 </Route>
 
@@ -27,8 +28,9 @@ function App() {
                     <Route path="/AdminPanel" element={<AdminPanel />} />
                 </Route>
 
-                <Route path="/Login/Admin" element={<AdminLogin />} />
-
+                <Route element={<Admincheck />}>
+                  <Route path="/login/Admin" element={<AdminLogin />} />
+                </Route>
             </Routes>
         </>
     );

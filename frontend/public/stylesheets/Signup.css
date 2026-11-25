@@ -1,0 +1,550 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600&display=swap");
+
+.su {
+    --night: #1b1340;
+    --violet: #6247f5;
+    --violet-dark: #4d34dc;
+    --lilac: #e9e4ff;
+    --mango: #ffb020;
+    --mint: #2fc795;
+    --ink: #17132b;
+    --ink-2: #625c7c;
+    --line: #e2def0;
+    --danger: #d6384a;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 46%);
+    min-height: 100vh;
+    background: #fff;
+    color: var(--ink);
+    font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.su *,
+.su *::before,
+.su *::after {
+    box-sizing: border-box;
+}
+
+.su :focus-visible {
+    outline: 2px solid var(--violet);
+    outline-offset: 2px;
+}
+
+/* =========================================================
+   Form side
+   ========================================================= */
+.su-form-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 28px 48px 24px;
+}
+
+.su-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.su-logo {
+    width: 38px;
+    height: 38px;
+}
+
+.su-logo-bg {
+    fill: var(--violet);
+}
+
+.su-logo-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+}
+
+.su-brand-name {
+    font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.su-main {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: 24px 0;
+}
+
+.su-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.su-title {
+    margin: 0;
+    font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+    font-size: clamp(34px, 4.2vw, 46px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+}
+
+.su-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.1em;
+}
+
+.su-line > span {
+    display: block;
+}
+
+.su-sub {
+    margin: 12px 0 0;
+    color: var(--ink-2);
+}
+
+/* ---------- fields ---------- */
+.su-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.su-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.su-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.su-field input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.su-field input::placeholder {
+    color: #a29cbb;
+}
+
+.su-field input:hover {
+    border-color: #cfc9e6;
+}
+
+.su-field input:focus {
+    outline: none;
+    border-color: var(--violet);
+    box-shadow: 0 0 0 4px var(--lilac);
+}
+
+.su-field input[aria-invalid="true"] {
+    border-color: var(--danger);
+}
+
+.su-field input[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 4px #fde4e8;
+}
+
+.su-password {
+    position: relative;
+}
+
+.su-password input {
+    padding-right: 68px;
+}
+
+.su-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--violet);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.su-toggle:hover {
+    background: var(--lilac);
+}
+
+/* ---------- strength meter ---------- */
+.su-meter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.su-bars {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.su-bar {
+    display: block;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.su-bar i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--violet);
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.su-meter-label {
+    min-width: 62px;
+    color: var(--ink-2);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* ---------- messages ---------- */
+.su-hint {
+    margin: 0;
+    overflow: hidden;
+    color: var(--danger);
+    font-size: 13px;
+}
+
+.su-server-error {
+    margin: 0;
+    padding: 0 12px;
+    border-radius: 12px;
+    background: #fde8eb;
+    color: var(--danger);
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.su-server-error::before,
+.su-server-error::after {
+    content: "";
+    display: block;
+    height: 10px;
+}
+
+/* ---------- buttons ---------- */
+.su-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 52px;
+    margin-top: 4px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--violet);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 24px -10px rgba(98, 71, 245, 0.7);
+}
+
+.su-submit:hover:not(:disabled) {
+    background: var(--violet-dark);
+}
+
+.su-submit:disabled {
+    cursor: progress;
+}
+
+.su-submit.is-done {
+    background: var(--mint);
+    box-shadow: 0 10px 24px -10px rgba(47, 199, 149, 0.8);
+    cursor: default;
+}
+
+.su-spin {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: su-spin 0.7s linear infinite;
+}
+
+@keyframes su-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.su-alt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    margin-top: 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.su-alt:hover {
+    background: #f7f5fd;
+    border-color: #cfc9e6;
+}
+
+.su-foot {
+    color: var(--ink-2);
+    font-size: 13px;
+}
+
+/* =========================================================
+   Visual side
+   ========================================================= */
+.su-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 44px 44px;
+    background: var(--night);
+    color: #fff;
+    overflow: hidden;
+}
+
+.su-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    pointer-events: none;
+}
+
+.su-glow-a {
+    top: -120px;
+    right: -80px;
+    width: 380px;
+    height: 380px;
+    background: rgba(98, 71, 245, 0.55);
+}
+
+.su-glow-b {
+    bottom: -140px;
+    left: -100px;
+    width: 340px;
+    height: 340px;
+    background: rgba(255, 176, 32, 0.22);
+}
+
+.su-stage {
+    position: relative;
+    flex: 1;
+    display: grid;
+    place-items: center;
+    min-height: 0;
+}
+
+.su-layer-arch {
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.su-arch,
+.su-echo {
+    height: clamp(300px, 52vh, 470px);
+    aspect-ratio: 0.78;
+    border-radius: 999px 999px 26px 26px;
+}
+
+.su-arch {
+    position: relative;
+    background: linear-gradient(160deg, #3b2c99, #6247f5 60%, #ffb020);
+    overflow: hidden;
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+}
+
+.su-arch img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.su-echo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -14px 0 0 18px;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
+}
+
+/* floating colour chips */
+.su-pos {
+    position: absolute;
+}
+
+.su-pos-a {
+    top: 12%;
+    left: 2%;
+}
+
+.su-pos-b {
+    top: 46%;
+    right: 0;
+}
+
+.su-pos-c {
+    bottom: 8%;
+    left: 8%;
+}
+
+.su-pos-badge {
+    top: 2%;
+    right: 6%;
+}
+
+.su-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px 8px 8px;
+    border-radius: 16px;
+    background: #fff;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+    box-shadow: 0 16px 34px -12px rgba(5, 3, 25, 0.6);
+}
+
+.su-chip i {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 1px rgba(23, 19, 43, 0.14);
+}
+
+.su-chip small {
+    display: block;
+    color: var(--ink-2);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* spinning star badge */
+.su-badge {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+}
+
+.su-badge-star {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.su-badge-star polygon {
+    fill: var(--mango);
+}
+
+.su-badge > span {
+    position: relative;
+    color: var(--night);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.15;
+    text-align: center;
+}
+
+/* copy under the stage */
+.su-visual-copy {
+    position: relative;
+    max-width: 420px;
+    margin-top: 28px;
+}
+
+.su-visual-copy h2 {
+    margin: 0 0 8px;
+    font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+}
+
+.su-visual-copy p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 1100px) {
+    .su-form-side {
+        padding: 24px 32px 20px;
+    }
+    .su-visual {
+        padding: 32px 28px 36px;
+    }
+}
+
+@media (max-width: 900px) {
+    .su {
+        grid-template-columns: 1fr;
+    }
+    .su-visual {
+        display: none;
+    }
+    .su-form-side {
+        padding: 20px 20px 16px;
+    }
+    .su-main {
+        place-items: start center;
+        padding-top: 28px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .su *,
+    .su *::before,
+    .su *::after {
+        transition: none !important;
+    }
+    .su-spin {
+        animation-duration: 1.6s;
+    }
+}

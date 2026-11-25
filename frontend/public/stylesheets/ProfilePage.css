@@ -1,0 +1,544 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600&display=swap");
+
+.sp {
+    --violet: #6247f5;
+    --violet-dark: #4d34dc;
+    --lilac: #e9e4ff;
+    --ink: #17132b;
+    --ink-2: #625c7c;
+    --line: #e2def0;
+
+    min-height: 100vh;
+    background: #fff;
+    color: var(--ink);
+    font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.sp *,
+.sp *::before,
+.sp *::after {
+    box-sizing: border-box;
+}
+
+.sp :focus-visible {
+    outline: 2px solid var(--violet);
+    outline-offset: 2px;
+}
+
+.sp h1,
+.sp h2,
+.sp h3,
+.sp-brand span {
+    font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+    margin: 0;
+}
+
+/* =========================================================
+   Top bar
+   ========================================================= */
+.sp-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+}
+
+.sp-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sp-brand span {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.sp-logo {
+    width: 36px;
+    height: 36px;
+}
+
+.sp-logo-bg {
+    fill: var(--violet);
+}
+
+.sp-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sp-bag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.sp-bag:hover {
+    border-color: #cfc9e6;
+    background: #faf9fe;
+}
+
+.sp-bag-count {
+    min-width: 22px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--violet);
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+}
+
+.sp-logout {
+    height: 42px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--ink);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.sp-logout:hover {
+    background: #2d2750;
+}
+
+/* =========================================================
+   Layout
+   ========================================================= */
+.sp-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 40px;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 32px 32px 64px;
+    align-items: start;
+}
+
+/* ---------- left menu ---------- */
+.sp-side {
+    position: sticky;
+    top: 92px;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 160px);
+}
+
+.sp-side-title {
+    margin: 0 0 10px;
+    color: var(--ink-2);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.sp-views {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sp-view {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 14px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sp-view em {
+    color: var(--ink-2);
+    font-size: 13px;
+    font-style: normal;
+}
+
+.sp-view:hover {
+    background: #f6f4fd;
+}
+
+.sp-view.is-active {
+    background: var(--lilac);
+    color: var(--violet-dark);
+    font-weight: 600;
+}
+
+.sp-view.is-active em {
+    color: var(--violet-dark);
+}
+
+.sp-side-foot {
+    margin: auto 0 0;
+    padding-top: 24px;
+    color: var(--ink-2);
+    font-size: 13px;
+}
+
+/* ---------- heading + tools ---------- */
+.sp-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.sp-head h1 {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+}
+
+.sp-count {
+    margin: 6px 0 0;
+    min-height: 1.45em;
+    color: var(--ink-2);
+}
+
+.sp-tools {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sp-search,
+.sp-sort {
+    height: 44px;
+    padding: 0 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.sp-search {
+    width: 230px;
+}
+
+.sp-sort {
+    padding-right: 36px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23625c7c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+}
+
+.sp-search::placeholder {
+    color: #a29cbb;
+}
+
+.sp-search:focus,
+.sp-sort:focus {
+    outline: none;
+    border-color: var(--violet);
+    box-shadow: 0 0 0 4px var(--lilac);
+}
+
+/* =========================================================
+   Products
+   ========================================================= */
+.sp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
+}
+
+.sp-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #fff;
+    transition: box-shadow 0.25s, border-color 0.25s;
+}
+
+.sp-card:hover {
+    border-color: #cfc9e6;
+    box-shadow: 0 22px 44px -26px rgba(23, 19, 43, 0.35);
+}
+
+.sp-card-image {
+    position: relative;
+    aspect-ratio: 1 / 1.05;
+    overflow: hidden;
+}
+
+.sp-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 18px;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.sp-card:hover .sp-card-image img {
+    transform: scale(1.06);
+}
+
+.sp-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--violet);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.sp-add {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 8px 20px -6px rgba(23, 19, 43, 0.45);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s, background 0.15s, color 0.15s;
+}
+
+.sp-card:hover .sp-add,
+.sp-add:focus-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sp-add:hover {
+    background: var(--violet);
+    color: #fff;
+}
+
+.sp-card-info {
+    padding: 14px 16px 18px;
+}
+
+.sp-card-info h3 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sp-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 6px 0 0;
+}
+
+.sp-price strong {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sp-price s {
+    font-size: 13px;
+    opacity: 0.65;
+}
+
+/* =========================================================
+   States: loading / empty / error
+   ========================================================= */
+.sp-skel {
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 12px 12px 18px;
+}
+
+.sp-skel-img,
+.sp-skel-line {
+    border-radius: 12px;
+    background: linear-gradient(100deg, #f1eefa 30%, #faf9fe 50%, #f1eefa 70%);
+    background-size: 200% 100%;
+    animation: sp-shimmer 1.4s linear infinite;
+}
+
+.sp-skel-img {
+    aspect-ratio: 1 / 0.95;
+}
+
+.sp-skel-line {
+    height: 14px;
+    margin: 14px 4px 0;
+}
+
+.sp-skel-short {
+    width: 40%;
+}
+
+@keyframes sp-shimmer {
+    to {
+        background-position: -200% 0;
+    }
+}
+
+.sp-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 72px 20px;
+    border: 1.5px dashed var(--line);
+    border-radius: 20px;
+    text-align: center;
+}
+
+.sp-state h2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.sp-state p {
+    margin: 0 0 12px;
+    color: var(--ink-2);
+}
+
+.sp-primary {
+    height: 46px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--violet);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.sp-primary:hover {
+    background: var(--violet-dark);
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 1000px) {
+    .sp-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px 20px 48px;
+    }
+
+    .sp-side {
+        position: static;
+        min-height: 0;
+    }
+
+    .sp-side-title,
+    .sp-side-foot {
+        display: none;
+    }
+
+    .sp-views {
+        flex-direction: row;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .sp-view {
+        flex: none;
+        gap: 8px;
+        border: 1.5px solid var(--line);
+        border-radius: 999px;
+    }
+
+    .sp-view.is-active {
+        border-color: var(--lilac);
+    }
+}
+
+@media (max-width: 600px) {
+    .sp-nav {
+        padding: 12px 16px;
+    }
+
+    .sp-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .sp-tools,
+    .sp-search {
+        width: 100%;
+    }
+
+    .sp-sort {
+        flex: 1;
+    }
+
+    .sp-card-image img {
+        padding: 10px;
+    }
+
+    .sp-card-info {
+        padding: 12px;
+    }
+}
+
+/* touch screens par hover nahi hota, isliye + button hamesha dikhao */
+@media (hover: none) {
+    .sp-add {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sp *,
+    .sp *::before,
+    .sp *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}

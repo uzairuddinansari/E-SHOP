@@ -1,0 +1,246 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600&display=swap");
+
+.lg {
+    --violet: #6247f5;
+    --violet-dark: #4d34dc;
+    --lilac: #e9e4ff;
+    --mango: #ffb020;
+    --ink: #17132b;
+    --ink-2: #625c7c;
+    --line: #e2def0;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    min-height: 100vh;
+    padding: 32px 20px;
+    background: #fff;
+    color: var(--ink);
+    font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.45;
+    overflow: hidden;
+}
+
+.lg *,
+.lg *::before,
+.lg *::after {
+    box-sizing: border-box;
+}
+
+.lg :focus-visible {
+    outline: 2px solid var(--violet);
+    outline-offset: 2px;
+}
+
+/* ---------- card ---------- */
+.lg-card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 36px;
+    border: 1px solid #ebe7f8;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 24px 60px -28px rgba(23, 19, 43, 0.28);
+}
+
+.lg-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.lg-logo {
+    width: 38px;
+    height: 38px;
+}
+
+.lg-logo-bg {
+    fill: var(--violet);
+}
+
+.lg-logo-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+}
+
+.lg-card h1 {
+    margin: 28px 0 0;
+    font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+}
+
+.lg-sub {
+    margin: 8px 0 0;
+    color: var(--ink-2);
+}
+
+/* ---------- form ---------- */
+.lg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 26px;
+}
+
+.lg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.lg-field label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.lg-field input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.lg-field input::placeholder {
+    color: #a29cbb;
+}
+
+.lg-field input:hover {
+    border-color: #cfc9e6;
+}
+
+.lg-field input:focus {
+    outline: none;
+    border-color: var(--violet);
+    box-shadow: 0 0 0 4px var(--lilac);
+}
+
+.lg-password {
+    position: relative;
+}
+
+.lg-password input {
+    padding-right: 68px;
+}
+
+.lg-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--violet);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.lg-toggle:hover {
+    background: var(--lilac);
+}
+
+/* ---------- button ---------- */
+.lg-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 52px;
+    margin-top: 4px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--violet);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 24px -10px rgba(98, 71, 245, 0.7);
+    transition: background 0.2s;
+}
+
+.lg-submit:hover:not(:disabled) {
+    background: var(--violet-dark);
+}
+
+.lg-submit:disabled {
+    cursor: progress;
+    opacity: 0.85;
+}
+
+.lg-spin {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: lg-spin 0.7s linear infinite;
+}
+
+@keyframes lg-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------- links ---------- */
+.lg-switch {
+    margin: 22px 0 0;
+    text-align: center;
+    color: var(--ink-2);
+}
+
+.lg-switch a,
+.lg-admin a {
+    color: var(--violet);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.lg-switch a:hover,
+.lg-admin a:hover {
+    text-decoration: underline;
+}
+
+.lg-admin {
+    position: relative;
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .lg-card {
+        padding: 28px 22px;
+    }
+    .lg-card h1 {
+        font-size: 32px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lg *,
+    .lg *::before,
+    .lg *::after {
+        transition: none !important;
+    }
+}

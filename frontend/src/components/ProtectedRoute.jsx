@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
+import "../../public/stylesheets/Protected.css"
 
 function ProtectedRoute(props) {
     const [auth, setAuth] = useState(null);
@@ -11,13 +12,14 @@ function ProtectedRoute(props) {
     })
     .then(() => setAuth(true))
     .catch((err) => {
-        console.log("STATUS:", err.response?.status);
-        console.log("ERROR:", err.response?.data);
         setAuth(false);
     });
 }, [props.route]);
 
-    if (auth === null) return <h2>Loading...</h2>;
+    if (auth === null) return  <div className="auth-loading">
+            <div className="loader"></div>
+            <p>Verifying Admin Access</p>
+        </div>;
 
     return auth ? <Outlet /> : <Navigate to="/" replace />;
 }
