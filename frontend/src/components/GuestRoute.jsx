@@ -7,7 +7,7 @@ function GuestRoute() {
     const [auth, setAuth] = useState(null);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/users/check-auth", {
+        axios.get(`${import.meta.env.VITE_API_URL}/users/check-auth`, {
             withCredentials: true
         })
         .then(() => setAuth(true))
@@ -16,7 +16,7 @@ function GuestRoute() {
 
     if (auth === null) return  <div className="auth-loading">
             <div className="loader"></div>
-            <p>Verifying Admin Access</p>
+            <p>Verifying it's you Access</p>
         </div>;
 
     return auth ? <Navigate to="/Profile" replace /> : <Outlet />;

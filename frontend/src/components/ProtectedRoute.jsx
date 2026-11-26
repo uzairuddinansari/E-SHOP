@@ -7,7 +7,7 @@ function ProtectedRoute(props) {
     const [auth, setAuth] = useState(null);
 
     useEffect(() => {
-    axios.get(`http://localhost:3000/${props.route}`, {
+    axios.get(`${import.meta.env.VITE_API_URL}${props.route}`, {
         withCredentials: true
     })
     .then(() => setAuth(true))
@@ -18,10 +18,10 @@ function ProtectedRoute(props) {
 
     if (auth === null) return  <div className="auth-loading">
             <div className="loader"></div>
-            <p>Verifying Admin Access</p>
+            <p>Verifying Access</p>
         </div>;
 
-    return auth ? <Outlet /> : <Navigate to="/" replace />;
+    return auth ? <Outlet /> : <Navigate to={props.redirect} replace />;
 }
 
 export default ProtectedRoute;

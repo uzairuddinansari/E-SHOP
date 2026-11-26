@@ -9,7 +9,7 @@ import "../../public/stylesheets/ProfilePage.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const BRAND = "Basta"; // apne brand ka naam yahan likho
-const API = "http://localhost:3000";
+const API = import.meta.env.VITE_API_URL;
 
 const VIEWS = [
     { id: "all", label: "All products" },
@@ -65,7 +65,7 @@ function BagIcon() {
 }
 
 /* ---------- ek product ka card ---------- */
-function ProductCard({ item }) {
+function ProductCard({ item ,addToBag}) {
     const hasDiscount = item.discount > 0;
 
     return (
@@ -81,11 +81,12 @@ function ProductCard({ item }) {
                 {hasDiscount && <span className="sp-badge">{item.discount}% off</span>}
 
                 <button
-                    className="sp-add"
-                    aria-label={`Add ${item.name} to bag`}
-                >
-                    +
-                </button>
+    className="sp-add"
+    onClick={() => addToBag(item)}
+    aria-label={`Add ${item.name} to bag`}
+>
+    +
+</button>
             </div>
 
             {/* neeche info wala hissa: panelColor aur textColor */}
@@ -188,18 +189,19 @@ const Profile = () => {
     }, [visible]);
 
     /* 4) Bag me add (abhi sirf screen par count badhta hai, server me save nahi hota) */
-    const addToBag = (item) => {
+ const addToBag = async (item) => {
+    try {
+        await axios.get(`${API}/add/products/${item._id}`, {
+            withCredentials: true
+        });
+
         setBag((n) => n + 1);
         toast.success(`${item.name} added to bag`);
 
-        if (!prefersReduced() && bagRef.current) {
-            gsap.fromTo(
-                bagRef.current,
-                { scale: 1 },
-                { scale: 1.18, duration: 0.15, yoyo: true, repeat: 1, ease: "power2.out" }
-            );
-        }
-    };
+    } catch (err) {
+        toast.error("Failed to add product");
+    }
+};
 
     /* 5) Logout */
     const handleLogout = async () => {
@@ -231,6 +233,16 @@ const Profile = () => {
                     {/* <button ref={bagRef} className="sp-bag" aria-label={`Bag, ${bag} items`}>
                         <BagIcon />
                     </button> */}
+
+                    <button
+        ref={bagRef}
+        className="sp-bag"
+        onClick={() => navigate("/cart")}
+        aria-label={`Bag, ${bag} items`}
+    >
+        <BagIcon />
+        {bag > 0 && <span className="sp-bag-count">{bag}</span>}
+    </button>
                     <button className="sp-logout" onClick={handleLogout}>
                         Log out
                     </button>
@@ -337,9 +349,16 @@ const Profile = () => {
 
                     {status === "ready" && visible.length > 0 && (
                         <div className="sp-grid">
-                            {visible.map((item) => (
+                            {/* {visible.map((item) => (
                                 <ProductCard key={item._id} item={item}  />
-                            ))}
+                            ))} */}
+                            {visible.map((item) => (
+    <ProductCard
+        key={item._id}
+        item={item}
+        addToBag={addToBag}
+    />
+))}
                         </div>
                     )}
                 </main>

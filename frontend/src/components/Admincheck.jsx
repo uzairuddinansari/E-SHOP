@@ -3,11 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
 import "../../public/stylesheets/Protected.css"
 
-function GuestRoute() {
+function AdminCheck() {
     const [auth, setAuth] = useState(null);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/owners/check/Admin", {
+        axios.get(`${import.meta.env.VITE_API_URL}/check/Admin`, {
             withCredentials: true
         })
         .then(() => setAuth(true))
@@ -26,4 +26,4 @@ function GuestRoute() {
     return auth ? <Navigate to="/AdminPanel" replace /> : <Outlet />;
 }
 
-export default GuestRoute;
+export default AdminCheck;

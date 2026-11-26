@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../public/stylesheets/Login.css";
 
 const BRAND = "Basta"; // apne brand ka naam yahan likho
-const API = "http://localhost:3000";
+const API = import.meta.env.VITE_API_URL;
 
 /* Server kabhi text bhejta hai, kabhi { message }. Dono se text nikalne ka chhota helper */
 function getText(data, fallback) {

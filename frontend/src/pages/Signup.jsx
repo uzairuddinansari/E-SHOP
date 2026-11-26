@@ -10,7 +10,7 @@ const BRAND = "BASTA";
 const HERO_IMAGE =
     "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D";
 
-const API = "http://localhost:3000";
+const API = import.meta.env.VITE_API_URL;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const prefersReduced = () =>

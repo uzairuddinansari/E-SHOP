@@ -25,7 +25,7 @@ const AdminLogin = () => {
         setLoading(true);
 
         try {
-            await axios.post("http://localhost:3000/owners/login", form, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/owners/login`, form, {
                 withCredentials: true,
             });
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "../../public/stylesheets/AdminPanel.css";
 
-const API = "http://localhost:3000";
+const API = import.meta.env.VITE_API_URL;
 const HEX = /^#[0-9a-f]{6}$/i;
 
 const COLOR_FIELDS = [

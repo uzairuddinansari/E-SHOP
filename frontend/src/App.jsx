@@ -8,6 +8,7 @@ import Guestroute from "./components/Guestroute"
 import AdminPanel from "./pages/AdminPanel";
 import AdminLogin from "./pages/AdminLogin";
 import Admincheck from "./components/Admincheck";
+import Cart from "./pages/Cart";
 
 function App() {
     return (
@@ -20,15 +21,18 @@ function App() {
                      <Route path="/Signup" element={<Singup />} />
                  </Route>
 
-                <Route element={<ProtectedRoute route="users/check-auth" />}>
+                <Route element={<ProtectedRoute route="/users/check-auth" redirect="/"/>}>
                     <Route path="/Profile" element={<Profile />} />
+                    <Route path="/cart" element={<Cart />} />
                 </Route>
 
-                <Route element={<ProtectedRoute route="owners/check/Admin"/>}>
+                <Route element={<ProtectedRoute route="/owners/check/Admin" redirect="/login/admin"/>}>
                     <Route path="/AdminPanel" element={<AdminPanel />} />
                 </Route>
 
-                <Route element={<Admincheck />}>
+                
+
+                <Route element={<Admincheck />}> 
                   <Route path="/login/Admin" element={<AdminLogin />} />
                 </Route>
             </Routes>
