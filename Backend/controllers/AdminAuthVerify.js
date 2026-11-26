@@ -28,10 +28,10 @@ const loginCheckAuth = async (req, res) => {
         );
 
         res.cookie("Admin", AdminToken, {
-            httpOnly: true,
-            // secure: process.env.NODE_ENV === "production",
-            sameSite: "lax"
-        });
+    httpOnly: true,
+    secure: true,
+    sameSite: "none"
+});
 
         res.json({
             message: "Admin Login Successful"

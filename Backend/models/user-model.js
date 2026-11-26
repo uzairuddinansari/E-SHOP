@@ -11,12 +11,12 @@ const userModel = mongoose.Schema({
     } ,
     email : String ,
     password : String ,
-    Card : {
-        type: Array ,
-        default : []
-    } ,
+    Card : [{ 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'products' // Must match the exact name used in mongoose.model('Card', cardSchema)
+  }],
     orders : {
-        type :Array,
+        type : Array,
         default : []
     },
     contact : Number ,

@@ -19,9 +19,10 @@ module.exports.loginuser = async (req, res) => {
             const adminToken = generateAdminToken(admin);
 
             res.cookie("Admin", adminToken, {
-                httpOnly: true,
-                sameSite: "lax"
-            });
+    httpOnly: true,
+    secure: true,
+    sameSite: "none"
+});
 
             return res.status(200).json({ message: "Admin Login Successfully", role: "admin" });
         }
@@ -41,9 +42,10 @@ module.exports.loginuser = async (req, res) => {
         const userToken = generateToken(user);
 
         res.cookie("token", userToken, {
-            httpOnly: true,
-            sameSite: "lax"
-        });
+    httpOnly: true,
+    secure: true,
+    sameSite: "none"
+});
 
         res.status(200).json({ message: "User Login Successfully", role: "user" });
 
