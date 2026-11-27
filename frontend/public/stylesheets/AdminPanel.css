@@ -491,3 +491,78 @@
         transition: none !important;
     }
 }
+
+/* ===== AdminPanel.css ke bilkul END me ye add karo ===== */
+
+/* row me ab 4 columns: image | naam+price | colours | Edit/Delete */
+.adm-row {
+    grid-template-columns: 56px minmax(0, 1fr) auto auto;
+}
+
+.adm-row.is-editing {
+    background: #f5f6fe;
+    box-shadow: -10px 0 0 #f5f6fe, 10px 0 0 #f5f6fe;
+}
+
+.adm-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.adm-btn {
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.adm-btn:hover:not(:disabled) {
+    background: var(--fog);
+    border-color: #c7cee0;
+}
+
+.adm-btn--danger {
+    color: var(--danger);
+}
+
+.adm-btn--danger:hover:not(:disabled) {
+    background: #fdecea;
+    border-color: #f3c5c0;
+}
+
+.adm-btn:disabled {
+    opacity: 0.55;
+    cursor: progress;
+}
+
+@media (max-width: 1180px) {
+    /* tang jagah me chips aur buttons neeche wali line me aa jayen */
+    .adm-row {
+        grid-template-columns: 56px minmax(0, 1fr) auto;
+    }
+    .adm-chips {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
+    .adm-actions {
+        grid-column: 3;
+        grid-row: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .adm-row {
+        grid-template-columns: 56px minmax(0, 1fr);
+    }
+    .adm-actions {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+}

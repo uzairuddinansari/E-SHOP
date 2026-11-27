@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
-import Guestroute from "./components/Guestroute"
+import Guestroute from "./components/GuestRoute"
 import AdminPanel from "./pages/AdminPanel";
 import AdminLogin from "./pages/AdminLogin";
 import Admincheck from "./components/Admincheck";

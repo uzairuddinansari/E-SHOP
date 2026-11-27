@@ -7,7 +7,7 @@ function AdminCheck() {
     const [auth, setAuth] = useState(null);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/check/Admin`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/owners/check/Admin`, {
             withCredentials: true
         })
         .then(() => setAuth(true))

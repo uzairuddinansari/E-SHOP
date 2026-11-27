@@ -73,6 +73,11 @@ function AdminPanel() {
     const [preview, setPreview] = useState(null);
     const [fileKey, setFileKey] = useState(0);
 
+    /* ===== NEW: edit / delete ke liye states ===== */
+    const [editingId, setEditingId] = useState(null);             // kaunsa product edit ho raha hai
+    const [existingPreview, setExistingPreview] = useState(null); // edit me purani image ka preview
+    const [deletingId, setDeletingId] = useState(null);           // kaunsa product delete ho raha hai
+
     /* image preview */
     useEffect(() => {
         if (!form.image) {
@@ -111,11 +116,39 @@ function AdminPanel() {
         GetProduct();
     }, []);
 
-    const createProduct = async (e) => {
+    /* ===== NEW: form ko khali karke "add" mode me wapas lao ===== */
+    const cancelEdit = () => {
+        setEditingId(null);
+        setExistingPreview(null);
+        setForm(emptyForm);
+        setFileKey((k) => k + 1);
+        setErr("");
+    };
+
+    /* ===== NEW: Edit dabane par product ka data form me bhar do ===== */
+    const startEdit = (item) => {
+        setEditingId(item._id);
+        setExistingPreview(`data:image/jpeg;base64,${item.image}`);
+        setForm({
+            image: null, // nayi image na chuni to purani hi rahegi
+            name: item.name || "",
+            price: item.price ?? "",
+            discount: item.discount || 0,
+            bgColor: (item.bgColor || "#E8ECF4").toUpperCase(),
+            panelColor: (item.panelColor || "#FFFFFF").toUpperCase(),
+            textColor: (item.textColor || "#161B2E").toUpperCase(),
+        });
+        setFileKey((k) => k + 1);
+        setErr("");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    /* ===== CHANGED: createProduct ab create bhi karta hai aur update bhi ===== */
+    const saveProduct = async (e) => {
         e.preventDefault();
         setErr("");
 
-        if (!form.image) return setErr("Choose a product image.");
+        if (!editingId && !form.image) return setErr("Choose a product image.");
         for (const { key, label } of COLOR_FIELDS) {
             if (!HEX.test(form[key]))
                 return setErr(`${label} needs a hex code like #1A2B3C.`);
@@ -127,20 +160,49 @@ function AdminPanel() {
             setSubmitting(true);
 
             const data = new FormData();
-            Object.keys(form).forEach((key) => data.append(key, form[key]));
-
-            await axios.post(`${API}/products/create`, data, {
-                withCredentials: true,
+            if (form.image) data.append("image", form.image); // sirf nayi image ho to bhejo
+            Object.keys(form).forEach((key) => {
+                if (key !== "image") data.append(key, form[key]);
             });
 
-            toast.success("Product created");
-            setForm(emptyForm);
-            setFileKey((k) => k + 1);
+            if (editingId) {
+                await axios.put(`${API}/products/${editingId}`, data, {
+                    withCredentials: true,
+                });
+                toast.success("Product updated");
+            } else {
+                await axios.post(`${API}/products/create`, data, {
+                    withCredentials: true,
+                });
+                toast.success("Product created");
+            }
+
+            cancelEdit();
             GetProduct();
         } catch (error) {
             setErr(error.response?.data?.message || error.message);
         } finally {
             setSubmitting(false);
+        }
+    };
+
+    /* ===== NEW: Delete ===== */
+    const deleteProduct = async (item) => {
+        if (!window.confirm(`Delete "${item.name}"? This cannot be undone.`)) return;
+
+        try {
+            setDeletingId(item._id);
+            await axios.delete(`${API}/products/${item._id}`, {
+                withCredentials: true,
+            });
+
+            setProducts((prev) => prev.filter((p) => p._id !== item._id));
+            if (editingId === item._id) cancelEdit();
+            toast.success("Product deleted");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to delete product");
+        } finally {
+            setDeletingId(null);
         }
     };
 
@@ -160,6 +222,8 @@ function AdminPanel() {
         return products.filter((p) => (p.name || "").toLowerCase().includes(q));
     }, [products, query]);
 
+    const shownPreview = preview || existingPreview;
+
     return (
         <div className="adm">
             <header className="adm-bar">
@@ -173,25 +237,33 @@ function AdminPanel() {
             </header>
 
             <div className="adm-layout">
-                {/* ---------- Add product ---------- */}
+                {/* ---------- Add / Edit product ---------- */}
                 <section className="adm-panel adm-form-panel">
-                    <h2>Add product</h2>
+                    <h2>{editingId ? "Edit product" : "Add product"}</h2>
 
-                    <form onSubmit={createProduct} noValidate>
+                    <form onSubmit={saveProduct} noValidate>
                         <label className="adm-drop">
                             <span className="adm-drop-tile">
-                                {preview ? (
-                                    <img src={preview} alt="Selected product" />
+                                {shownPreview ? (
+                                    <img src={shownPreview} alt="Selected product" />
                                 ) : (
                                     <span aria-hidden="true">+</span>
                                 )}
                             </span>
                             <span className="adm-drop-text">
                                 <strong>
-                                    {form.image ? "Change image" : "Choose image"}
+                                    {form.image
+                                        ? "Change image"
+                                        : editingId
+                                        ? "Replace image (optional)"
+                                        : "Choose image"}
                                 </strong>
                                 <small>
-                                    {form.image ? form.image.name : "PNG or JPG"}
+                                    {form.image
+                                        ? form.image.name
+                                        : editingId
+                                        ? "Keeps the current image"
+                                        : "PNG or JPG"}
                                 </small>
                             </span>
                             <input
@@ -258,8 +330,18 @@ function AdminPanel() {
                         )}
 
                         <button className="adm-primary" type="submit" disabled={submitting}>
-                            {submitting ? "Saving…" : "Create product"}
+                            {submitting
+                                ? "Saving…"
+                                : editingId
+                                ? "Update product"
+                                : "Create product"}
                         </button>
+
+                        {editingId && (
+                            <button type="button" className="adm-ghost" onClick={cancelEdit}>
+                                Cancel editing
+                            </button>
+                        )}
                     </form>
                 </section>
 
@@ -290,7 +372,10 @@ function AdminPanel() {
                     ) : (
                         <ul className="adm-rows">
                             {filtered.map((item) => (
-                                <li className="adm-row" key={item._id}>
+                                <li
+                                    className={`adm-row ${editingId === item._id ? "is-editing" : ""}`}
+                                    key={item._id}
+                                >
                                     <div
                                         className="adm-thumb"
                                         style={{ background: item.bgColor }}
@@ -321,6 +406,25 @@ function AdminPanel() {
                                             </li>
                                         ))}
                                     </ul>
+
+                                    {/* ===== NEW: colours ke aage Edit aur Delete ===== */}
+                                    <div className="adm-actions">
+                                        <button
+                                            type="button"
+                                            className="adm-btn"
+                                            onClick={() => startEdit(item)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="adm-btn adm-btn--danger"
+                                            onClick={() => deleteProduct(item)}
+                                            disabled={deletingId === item._id}
+                                        >
+                                            {deletingId === item._id ? "Deleting…" : "Delete"}
+                                        </button>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
