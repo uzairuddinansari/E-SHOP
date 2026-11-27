@@ -1,3 +1,4 @@
+const cookieOptions = require("../utils/cookieOptions");
 const userSchema = require("../models/user-model");
 const bcrypt = require("bcrypt");
 const { AdminToken: generateAdminToken, generateToken } = require("../utils/jwt");
@@ -18,11 +19,7 @@ module.exports.loginuser = async (req, res) => {
 
             const adminToken = generateAdminToken(admin);
 
-            res.cookie("Admin", adminToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none"
-});
+            res.cookie("Admin", adminToken, cookieOptions);
 
             return res.status(200).json({ message: "Admin Login Successfully", role: "admin" });
         }
@@ -41,11 +38,7 @@ module.exports.loginuser = async (req, res) => {
 
         const userToken = generateToken(user);
 
-        res.cookie("token", userToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none"
-});
+        res.cookie("token", userToken, cookieOptions);
 
         res.status(200).json({ message: "User Login Successfully", role: "user" });
 
@@ -55,8 +48,8 @@ module.exports.loginuser = async (req, res) => {
 };
 
 module.exports.logoutuser = (req, res) => {
-    res.clearCookie("token");
-    res.clearCookie("Admin");
+    res.clearCookie("token", cookieOptions);
+    res.clearCookie("Admin", cookieOptions);
 
     res.status(200).send("Logout Successfully");
 };

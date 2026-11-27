@@ -1,3 +1,4 @@
+const cookieOptions = require("../utils/cookieOptions");
 const OwnersSchema = require("../models/owner-schema")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -27,11 +28,7 @@ const loginCheckAuth = async (req, res) => {
             { expiresIn: "2d" }
         );
 
-        res.cookie("Admin", AdminToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none"
-});
+        res.cookie("Admin", AdminToken, cookieOptions);
 
         res.json({
             message: "Admin Login Successful"

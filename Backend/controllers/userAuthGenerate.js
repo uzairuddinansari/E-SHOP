@@ -1,3 +1,4 @@
+const cookieOptions = require("../utils/cookieOptions");
 
 const bcrypt = require("bcrypt");
 const userSchema = require("../models/user-model");
@@ -24,12 +25,7 @@ module.exports = async (req, res) => {
 
         const UserToken = generateToken(user);
 
-        res.cookie("token", UserToken, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            path: "/"
-        });
+        res.cookie("token", UserToken, cookieOptions);
 
         return res.status(201).send("User Created Successfully");
 

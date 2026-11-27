@@ -1,10 +1,7 @@
+const cookieOptions = require("../utils/cookieOptions");
 const logoutAdmin = (req, res) => {
     try {
-        res.clearCookie("Admin", {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax"
-        });
+        res.clearCookie("Admin", cookieOptions);
 
         res.status(200).json({
             message: "Logout Successfully"

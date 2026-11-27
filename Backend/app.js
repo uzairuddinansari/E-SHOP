@@ -18,8 +18,9 @@ const indexRouter = require("./routes/index.js");
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://944a-153-117-47-65.ngrok-free.app"
-    ],
+        "https://944a-153-117-47-65.ngrok-free.app",
+        process.env.FRONTEND_URL
+    ].filter(Boolean),
     credentials: true
 }));
 
@@ -44,5 +45,8 @@ app.use("/owners", ownersRouter);
 app.use("/products", productsRouter);
 app.use("/users", usersRouter);
 
-app.listen(3000);
+if (process.env.NODE_ENV !== "production") {
+    app.listen(3000, () => console.log("Server running"));
+}
+module.exports = app;
 

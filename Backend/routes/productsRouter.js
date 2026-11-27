@@ -1,39 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const anyAuth = require("../middleware/anyAuth")
-const productModel = require("../models/product-schema")
+const mongoose = require("mongoose");
+const adminCheck = require("../middleware/AdminCheck")
 const upload = require("../config/multer")
+const {createProduct,updateProduct,deleteProduct} = require("../controllers/ProductAuth")
 
-router.get("/",  anyAuth, (req, res) => {
+router.get("/",  adminCheck, (req, res) => {
     res.send("Products route working");
 });
 
-router.post("/create", anyAuth, upload.single("image"), async (req, res) => {
-    try {
-        const {name,price,discount,bgColor,panelColor,textColor} = req.body;
-        
-        const newProduct = await productModel.create({
-            image:req.file.buffer,
-            name,
-            price,
-            discount,
-            bgColor,
-            panelColor,
-            textColor,
-        });
+router.post("/create", adminCheck, upload.single("image"), createProduct);
 
-        res.status(201).json({
-            message: "Product created successfully",
-            product: newProduct
-        });
+/* ---------- UPDATE (sirf admin) ---------- */
+router.put("/:id", adminCheck, upload.single("image"),updateProduct);
 
-        res.send(newProduct)
-
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
+/* ---------- DELETE (sirf admin) ---------- */
+router.delete("/:id", adminCheck, deleteProduct);
 
 
 module.exports = router;
